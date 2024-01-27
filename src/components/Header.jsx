@@ -8,11 +8,11 @@ export default function Header() {
     const handleChange = (e) => setSearch(e.target.value);
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate(search);
+        navigate(`/search/${search}`);
     }
 
     return (
-        <header className='flex justify-between my-5'>
+        <header className='flex justify-between p-5 mb-2'>
             <Link to='/'>
                 <img
                     className=''

@@ -7,10 +7,10 @@ export default function ErrorPage() {
     return (
         <div>
             <h1>
-            Not Fount 💨
+            Not Found 💨
             </h1>
             <p>
-                <i>{error.statusText || error.message}</i>
+                <i>{error.statusText ?? error.message}</i>
             </p>
         </div>
     );
