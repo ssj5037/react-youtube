@@ -6,7 +6,10 @@ export default function VideoSideCard({ video }) {
     const navigate = useNavigate();
 
     return (
-        <div className='cursor-pointer flex gap-3' onClick={() => navigate(`/watch/${video.id}`, { state: { video } })}>
+        <div
+            className='cursor-pointer flex gap-3'
+            // onClick={() => navigate(`/watch/${video.id}`, { state: { video } })}>
+            onClick={() => navigate(`/watch/${video.id}`)}>
             <figure className='overflow-hidden rounded-md cursor-pointer basis-40'>
                 <img
                     className='rounded-md hover:scale-105 transition-all '

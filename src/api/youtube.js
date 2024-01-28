@@ -7,14 +7,14 @@ export default class Youtube {
         return text ? this.#searchByKeyword(text) : this.#mostPopular();
     }
 
-    async channel(id) {
-        return this.#getChannel(id);
+    async video(id) {
+        return this.#getVideo(id);
     }
 
     async #searchByKeyword(text) {
         return await this.apiClient.search({
             params: {
-                part: 'snippet,statistics',
+                part: 'snippet',
                 maxResults: 25,
                 type: 'video',
                 q: text
@@ -26,7 +26,7 @@ export default class Youtube {
     async #mostPopular() {
         return this.apiClient.videos({
             params: {
-                part: 'snippet,statistics',
+                part: 'snippet',
                 maxResults: 25,
                 chart: 'mostPopular',
                 regionCode: 'KR'
@@ -35,14 +35,23 @@ export default class Youtube {
         .then((res) => res.data.items);
     }
 
-    async #getChannel(id) {
-        return await this.apiClient.channel({
+    async #getVideo(id) {
+        return this.apiClient.videos({
             params: {
-                part: 'snippet,statistics',
+                part: 'snippet,contentDetails,statistics',
                 id
             }
         })
-        .then(res => res.data.items[0]);
+        .then((res) => res.data.items[0])
+        .then(async (video) => {
+            const channel = await this.apiClient.channel({
+                params: {
+                    part: 'snippet,statistics',
+                    id: video.snippet.channelId
+                }
+            })
+            return {video, channel: channel.data.items[0]};
+        });
     }
 
 }

@@ -26,7 +26,7 @@ export default function Home() {
     const { text } = useParams();
     const { youtube } = useYoutubeApi();
     const { isLoading, data: videos } = useQuery({
-        queryKey: ['videos', text ?? ''],
+        queryKey: ['videos', text],
         queryFn: () => youtube.search(text),
         staleTime: 1 * 60 * 1000
     });
