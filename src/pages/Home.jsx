@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query'
 import VideoCard from '../components/VideoCard';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useYoutubeApi } from '../context/YoutubeApiContext';
 import useYoutubeFake from '../hooks/useYoutubeFake';
 
@@ -24,23 +24,19 @@ import useYoutubeFake from '../hooks/useYoutubeFake';
 //     };
 
 export default function Home() {
-    const navigate = useNavigate();
     const { text } = useParams();
-    const api = useYoutubeFake(text);
-    // const { youtube } = useYoutubeApi();
+    // const api = useYoutubeFake(text);
+    const { youtube } = useYoutubeApi();
     const { isLoading, data: videos } = useQuery({
         queryKey: ['videos', text ?? ''],
-        queryFn: () => api,
-        staleTime: 5 * 60 * 1000,
+        queryFn: () => youtube.search(text)
     });
     
-    const handleDetail = (id) => {navigate(`/watch/${id}`)}
-
     if (isLoading) return <div>로딩중...</div>
 
     return (
         <section className='grid grid-cols-1 gap-4 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'>
-            {videos.map(video => <VideoCard key={video.id} video={video} onClick={handleDetail} />) }
+            {videos.map(video => <VideoCard key={video.id} video={video} />) }
         </section>
     );
 }

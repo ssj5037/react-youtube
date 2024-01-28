@@ -1,14 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 import { format } from 'timeago.js';
 
-export default function VideoCard({ video, onClick }) {
+export default function VideoCard({ video }) {
+    const navigate = useNavigate();
 
     return (
-        <div className='cursor-pointer' onClick={()=>onClick(video.id)}>
+        <div className='cursor-pointer' onClick={() => navigate(`/watch/${video.id}`, { state: { video } })}>
             <figure className='overflow-hidden rounded-xl cursor-pointer'>
                 <img
                     className='rounded-xl hover:scale-105 transition-all '
-                    id={video.etag}
+                    id={video.id}
                     width={'100%'}
                     height={'100%'}
                     src={video.snippet.thumbnails.medium.url}

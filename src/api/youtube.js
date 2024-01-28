@@ -7,6 +7,10 @@ export default class Youtube {
         return text ? this.#searchByKeyword(text) : this.#mostPopular();
     }
 
+    async channel(id) {
+        return this.#getChannel(id);
+    }
+
     async #searchByKeyword(text) {
         return await this.apiClient.search({
             params: {
@@ -30,4 +34,15 @@ export default class Youtube {
         })
         .then((res) => res.data.items);
     }
+
+    async #getChannel(id) {
+        return await this.apiClient.channel({
+            params: {
+                part: 'snippet,statistics',
+                id
+            }
+        })
+        .then(res => res.data.items[0]);
+    }
+
 }

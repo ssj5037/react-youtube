@@ -4,15 +4,6 @@ import VideoSideCard from '../components/VideoSideCard';
 import { useNavigate } from 'react-router-dom';
 import { useYoutubeApi } from '../context/YoutubeApiContext';
 
-// export const loader = (queryClient) =>
-//     async () => {
-//         const query = homeQuery();
-//         return (
-//             queryClient.getQueryData(query.queryKey)
-//             ?? (await queryClient.fetchQuery(query))
-//         )
-//     };
-
 export default function VideoSide() {
     const navigate = useNavigate();
     const youtube = useYoutubeApi();

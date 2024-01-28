@@ -3,7 +3,7 @@ import { format } from 'timeago.js';
 
 const numberFormatter = new Intl.NumberFormat('ko', {notation: 'compact'});
     
-export default function VideoMain({ video }) {
+export default function VideoMain({ video, channel }) {
 
     return (
         <article className='flex flex-col gap-2'>
@@ -18,25 +18,23 @@ export default function VideoMain({ video }) {
                 ></iframe>
             </figure>
             <h1 className='text-2xl font-bold'>{video.snippet.title}</h1>
-            {/* {
-                channels.items.map(channel => (
-                    <div key={channel.id}>
-                        <img
-                            src={channel.snippet.thumbnails.default.url}
-                            width={channel.snippet.thumbnails.default.width}
-                            height={channel.snippet.thumbnails.default.height}
-                            alt={channel.snippet.description}
-                        />
-                        <p className='text-md font-bold'>{video.snippet.channelTitle}</p>
-                    </div>
-                ))
-            } */}
-            <p className='text-md font-bold'>{video.snippet.channelTitle}</p>
-            <div className='p-5 rounded-md bg-gray-100'>
+            <div className='flex gap-3 items-center'>
+                <img
+                    className='w-12 rounded-full'
+                    src={channel.snippet.thumbnails.default.url}
+                    alt={channel.snippet.description}
+                    title={channel.snippet.title}
+                />
+                <div>
+                    <p className='text-md font-bold'>{video.snippet.channelTitle}</p>
+                    <p className='text-sm'>구독자 {numberFormatter.format(channel.statistics.subscriberCount)}명</p>
+                </div>
+            </div>
+            <div className='p-3 rounded-md bg-gray-100'>
                 <span>조회수 {numberFormatter.format(video.statistics.viewCount)}회 </span>
                 <span>{format('2024-01-27 10:00:00', 'ko')}</span>
                 <p>{video.snippet.tags.map(tag => <span className='text-blue-500 mr-1' key={tag}>#{tag}</span>)}</p>
-                <p>{video.snippet.description}</p>
+                <p className='whitespace-pre-wrap'>{video.snippet.description}</p>
             </div>
         </article>
     )
