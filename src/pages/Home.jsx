@@ -2,12 +2,14 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query'
 import VideoCard from '../components/VideoCard';
 import { useNavigate, useParams } from 'react-router-dom';
+import FakeYoutube from '../api/youtubeFake';
+import Youtube from '../api/youtube';
 
 export const homeQuery = (text) => ({
     queryKey: ['videos', text ?? ''],
-    queryFn: async () => {
-        const res = await fetch(`data/videos_${text?'keyword':'trends'}.json`);
-        return res.json();
+    queryFn: () => {
+        const youtube = new FakeYoutube();
+        return youtube.search(text);
     },
     staleTime: 5 * 60 * 1000,
 });
@@ -32,7 +34,7 @@ export default function Home() {
 
     return (
         <section className='grid grid-cols-1 gap-4 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'>
-            {videos.items.map(video => <VideoCard key={video.etag} video={video} onClick={handleDetail} />) }
+            {videos.map(video => <VideoCard key={video.etag} video={video} onClick={handleDetail} />) }
         </section>
     );
 }
