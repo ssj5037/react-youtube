@@ -6,7 +6,7 @@ import { register } from "timeago.js";
 import Root from "./pages/Root";
 import ErrorPage from "./pages/ErrorPage";
 import Home, {loader as homeLoader} from "./pages/Home";
-import Search, { loader as searchloader } from "./pages/Search";
+// import Search, { loader as searchloader } from "./pages/Search";
 import Video, {loader as videoLoader} from "./pages/Video";
 import VideoSide, {loader as videoSideLoader} from "./pages/VideoSide";
 
@@ -22,8 +22,9 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
-      {path: '', element: <Home />, loader: homeLoader(queryClient)},
-      {path: 'search/:text', element: <Search />, loader: searchloader(queryClient)},
+      {index: true, element: <Home />, loader: homeLoader(queryClient)},
+      {path: 'videos', element: <Home />, loader: homeLoader(queryClient)},
+      {path: 'videos/:text', element: <Home />, loader: homeLoader(queryClient)},
       {
         path: "watch/:id", element: <Video />,
         loader: videoLoader(queryClient),
