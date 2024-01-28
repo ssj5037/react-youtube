@@ -1,16 +1,8 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query'
-import VideoCard from '../components/VideoCard';
+import VideoSideCard from '../components/VideoSideCard';
 import { useNavigate } from 'react-router-dom';
-
-export const homeQuery = () => ({
-    queryKey: ['videos'],
-    queryFn: async () => {
-        const res = await fetch(`data/videos_trends.json`);
-        return res.json();
-    },
-    staleTime: 5 * 60 * 1000,
-});
+import { homeQuery } from './Home';
 
 export const loader = (queryClient) =>
     async () => {
@@ -21,7 +13,7 @@ export const loader = (queryClient) =>
         )
     };
 
-export default function Home() {
+export default function VideoSide() {
     const navigate = useNavigate();
     const { isLoading, data: videos } = useQuery(homeQuery());
     
@@ -30,8 +22,8 @@ export default function Home() {
     if (isLoading) return <div>로딩중...</div>
 
     return (
-        <section className='grid grid-cols-1 gap-4 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'>
-            {videos.items.map(video => <VideoCard key={video.etag} video={video} onClick={handleDetail} />) }
+        <section className='flex flex-col gap-3'>
+            {videos.items.map(video => <VideoSideCard key={video.etag} video={video} onClick={handleDetail} />) }
         </section>
     );
 }
