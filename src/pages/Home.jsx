@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import VideoCard from '../components/VideoCard';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useYoutubeApi } from '../context/YoutubeApiContext';
+import useYoutubeFake from '../hooks/useYoutubeFake';
 
 // export const homeQuery = (text) => ({
 //     queryKey: ['videos', text ?? ''],
@@ -25,10 +26,11 @@ import { useYoutubeApi } from '../context/YoutubeApiContext';
 export default function Home() {
     const navigate = useNavigate();
     const { text } = useParams();
-    const { youtube } = useYoutubeApi();
+    const api = useYoutubeFake(text);
+    // const { youtube } = useYoutubeApi();
     const { isLoading, data: videos } = useQuery({
         queryKey: ['videos', text ?? ''],
-        queryFn: () => youtube.search(text),
+        queryFn: () => api,
         staleTime: 5 * 60 * 1000,
     });
     
