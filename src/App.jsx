@@ -9,6 +9,7 @@ import Home, {loader as homeLoader} from "./pages/Home";
 // import Search, { loader as searchloader } from "./pages/Search";
 import Video, {loader as videoLoader} from "./pages/Video";
 import VideoSide, {loader as videoSideLoader} from "./pages/VideoSide";
+import { YoutubeApiProvider } from "./context/YoutubeApiContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,14 +23,14 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
-      {index: true, element: <Home />, loader: homeLoader(queryClient)},
-      {path: 'videos', element: <Home />, loader: homeLoader(queryClient)},
-      {path: 'videos/:text', element: <Home />, loader: homeLoader(queryClient)},
+      {index: true, element: <Home />},
+      {path: 'videos', element: <Home />},
+      {path: 'videos/:text', element: <Home />},
       {
         path: "watch/:id", element: <Video />,
         loader: videoLoader(queryClient),
         children: [
-          {index: true, element: <VideoSide />, loader: videoSideLoader(queryClient)},
+          {index: true, element: <VideoSide />},
         ]
       }
     ]
@@ -40,11 +41,13 @@ const router = createBrowserRouter([
 function App() {
   register('ko', koLocale);
   return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} >
-      </RouterProvider>
-      <ReactQueryDevtools initialIsOpen={true} />
-    </QueryClientProvider>
+    <YoutubeApiProvider>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} >
+        </RouterProvider>
+        <ReactQueryDevtools initialIsOpen={true} />
+      </QueryClientProvider>
+    </YoutubeApiProvider>
   );
 }
 

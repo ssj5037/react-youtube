@@ -2,20 +2,25 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query'
 import VideoSideCard from '../components/VideoSideCard';
 import { useNavigate } from 'react-router-dom';
-import { homeQuery } from './Home';
+import { useYoutubeApi } from '../context/YoutubeApiContext';
 
-export const loader = (queryClient) =>
-    async () => {
-        const query = homeQuery();
-        return (
-            queryClient.getQueryData(query.queryKey)
-            ?? (await queryClient.fetchQuery(query))
-        )
-    };
+// export const loader = (queryClient) =>
+//     async () => {
+//         const query = homeQuery();
+//         return (
+//             queryClient.getQueryData(query.queryKey)
+//             ?? (await queryClient.fetchQuery(query))
+//         )
+//     };
 
 export default function VideoSide() {
     const navigate = useNavigate();
-    const { isLoading, data: videos } = useQuery(homeQuery());
+    const youtube = useYoutubeApi();
+    const { isLoading, data: videos } = useQuery({
+        queryKey: ['videos', ''],
+        queryFn: () => youtube.videos(),
+        staleTime: 5 * 60 * 1000,
+    });
     
     const handleDetail = (id) => {navigate(`/watch/${id}`)}
 
