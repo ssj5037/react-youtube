@@ -9,7 +9,6 @@ const searchQuery = (text) => ({
         const res = await fetch(`data/videos_keyword.json`);
         return res.json();
     },
-    staleTime: 5 * 1000,
 });
 
 export const loader = (queryClient) =>

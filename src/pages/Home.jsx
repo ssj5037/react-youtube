@@ -9,7 +9,7 @@ const homeQuery = () => ({
         const res = await fetch(`data/videos_trends.json`);
         return res.json();
     },
-    staleTime: 5 * 1000,
+    staleTime: 5 * 60 * 1000,
 });
 
 export const loader = (queryClient) =>
