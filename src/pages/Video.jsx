@@ -8,16 +8,17 @@ import VideoSideCard from '../components/VideoSideCard';
 export default function Video() {
     const { id } = useParams();
     const { state: { video } } = useLocation();
-
     const { youtube } = useYoutubeApi();
     const { isLoading: channelLoading, data: channel } = useQuery({
-        queryKey: ['video', id],
-        queryFn: async () => youtube.channel(id)
+        queryKey: ['video', video.snippet.channelId],
+        queryFn: async () => youtube.channel(video.snippet.channelId),
+        staleTime: 5 * 60 * 1000
     });
-    
+
     const { isLoading: videosLoading, data: videos } = useQuery({
         queryKey: ['video'],
-        queryFn: async () => youtube.search()
+        queryFn: async () => youtube.search(),
+        staleTime: 5 * 60 * 1000
     });
 
     if (channelLoading || videosLoading ) return <div>로딩중...</div>

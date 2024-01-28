@@ -34,7 +34,7 @@ export default function VideoMain({ video, channel }) {
                 <span>조회수 {numberFormatter.format(video.statistics.viewCount)}회 </span>
                 <span>{format('2024-01-27 10:00:00', 'ko')}</span>
                 <p>{video.snippet.tags.map(tag => <span className='text-blue-500 mr-1' key={tag}>#{tag}</span>)}</p>
-                <p className='whitespace-pre-wrap'>{video.snippet.description}</p>
+                <pre className='whitespace-pre-wrap'>{video.snippet.description}</pre>
             </div>
         </article>
     )

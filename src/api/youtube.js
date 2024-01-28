@@ -14,7 +14,7 @@ export default class Youtube {
     async #searchByKeyword(text) {
         return await this.apiClient.search({
             params: {
-                part: 'snippet',
+                part: 'snippet,statistics',
                 maxResults: 25,
                 type: 'video',
                 q: text
@@ -26,7 +26,7 @@ export default class Youtube {
     async #mostPopular() {
         return this.apiClient.videos({
             params: {
-                part: 'snippet',
+                part: 'snippet,statistics',
                 maxResults: 25,
                 chart: 'mostPopular',
                 regionCode: 'KR'

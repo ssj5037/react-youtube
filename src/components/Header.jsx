@@ -19,7 +19,7 @@ export default function Header() {
 
     return (
         <header className='flex justify-between p-5 mb-2'>
-            <Link to='/' className='flex justify-center items-center gap-2 font-bold text-3xl tracking-tighter uppercase'>
+            <Link to='/' className='flex justify-center items-center gap-2 font-bold text-3xl tracking-tighter'>
                 <BsYoutube className='text-red-600 text-4xl' />
                 <h1>Youtube</h1>
             </Link>

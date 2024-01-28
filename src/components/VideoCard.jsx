@@ -7,7 +7,7 @@ export default function VideoCard({ video }) {
 
     return (
         <div className='cursor-pointer' onClick={() => navigate(`/watch/${video.id}`, { state: { video } })}>
-            <figure className='overflow-hidden rounded-xl cursor-pointer'>
+            <figure className='overflow-hidden rounded-xl'>
                 <img
                     className='rounded-xl hover:scale-105 transition-all '
                     id={video.id}
