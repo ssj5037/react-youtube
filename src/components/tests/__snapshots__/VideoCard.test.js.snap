@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoCard renders grid type correctly 1`] = `
+<li
+  className="cursor-pointer"
+  onClick={[Function]}
+>
+  <figure
+    className="overflow-hidden rounded-xl"
+  >
+    <img
+      alt="title"
+      className="rounded-xl hover:scale-105 transition-all "
+      height="100%"
+      id={1}
+      src="http://image/"
+      width="100%"
+    />
+  </figure>
+  <p
+    className="text-lg line-clamp-2"
+  >
+    title
+  </p>
+  <p
+    className="text-sm text-gray-500"
+  >
+    channelTitle
+  </p>
+  <p
+    className="text-sm text-gray-500"
+  >
+    just now
+  </p>
+</li>
+`;
+
+exports[`VideoCard renders list type correctly 1`] = `
+<li
+  className="cursor-pointer"
+  onClick={[Function]}
+>
+  <figure
+    className="overflow-hidden rounded-xl"
+  >
+    <img
+      alt="title"
+      className="rounded-xl hover:scale-105 transition-all "
+      height="100%"
+      id={1}
+      src="http://image/"
+      width="100%"
+    />
+  </figure>
+  <p
+    className="text-lg line-clamp-2"
+  >
+    title
+  </p>
+  <p
+    className="text-sm text-gray-500"
+  >
+    channelTitle
+  </p>
+  <p
+    className="text-sm text-gray-500"
+  >
+    just now
+  </p>
+</li>
+`;
